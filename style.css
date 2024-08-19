@@ -1,0 +1,9 @@
+#divPrincipal {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+}
+
+h1 {
+  margin-left: 3%;
+}

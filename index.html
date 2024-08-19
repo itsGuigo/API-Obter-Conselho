@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conselho</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="divPrincipal" class="col-md-12">
+      <div class="row">
+        <h1>Conselho do dia</h1>
+        <div class="col-md-6">
+          <button type="button" id="btnPedirConselho" class="btn btn-info">
+            Clique Aqui para pedir um Coselho!
+          </button>
+          <div>
+            <div class="row">
+              <h4 id="conselho"></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- <script>
+  document
+    .getElementById("btnPedirConselho")
+    .addEventListener("click", function () {
+      fetch("https://api.adviceslip.com/advice")
+        .then((response) => response.json()) // Converte o response para JSON
+        .then((data) => {
+          document.getElementById("conselho").textContent = data.slip.advice;
+        })
+        .catch((error) => {
+          document.getElementById("conselho").textContent =
+            "Não foi possível obter o conselho. Tente novamente mais tarde.";
+          console.error("Erro:", error);
+        });
+    });
+</script> -->
+<script>
+  $(document).ready(() => {
+    $("#btnPedirConselho").click(() => {
+      $.ajax({
+        url: "https://api.adviceslip.com/advice",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+          var advice = data.slip.advice;
+          $("#conselho").text(advice);
+        },
+        erro: function () {
+          $("#conselho").text(
+            "Não foi possível obter o conselho :( Tente novamente mais tarde."
+          );
+        },
+      });
+    });
+  });
+</script>
